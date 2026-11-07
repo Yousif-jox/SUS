@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>FoodBridge — Platform Documentation</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #16211c;
+    font-size: 10.2pt;
+    line-height: 1.55;
+  }
+  h1, h2, h3, h4 { margin: 0; letter-spacing: -0.01em; line-height: 1.2; }
+  p { margin: 0 0 8px; }
+  ul, ol { margin: 0 0 10px; padding-left: 18px; }
+  li { margin-bottom: 4px; }
+  small { font-size: 8.5pt; color: #5c6b63; }
+
+  .cover {
+    background: #0f2a1e; color: #fff; border-radius: 14px;
+    padding: 34px 30px; margin-bottom: 22px;
+  }
+  .cover .eyebrow { font-size: 8.5pt; letter-spacing: .16em; text-transform: uppercase; color: #8ad8ac; font-weight: 700; }
+  .cover h1 { font-size: 30pt; margin: 10px 0 6px; }
+  .cover h1 span { color: #8ad8ac; }
+  .cover .sub { font-size: 11pt; color: rgba(255,255,255,.78); max-width: 460px; }
+  .cover .meta { margin-top: 18px; display: flex; gap: 26px; font-size: 8.6pt; color: rgba(255,255,255,.62); }
+  .cover .meta b { display: block; color: #fff; font-size: 9.6pt; font-weight: 600; }
+
+  h2.section {
+    font-size: 15pt; margin: 24px 0 10px; padding-bottom: 6px;
+    border-bottom: 2px solid #218c5a; color: #14603d;
+  }
+  h2.section:first-of-type { margin-top: 8px; }
+  h3 { font-size: 11.2pt; margin: 16px 0 6px; color: #16211c; }
+  h4 { font-size: 9.8pt; margin: 12px 0 4px; color: #14603d; text-transform: uppercase; letter-spacing: .06em; }
+
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 14px; font-size: 9pt; }
+  th { background: #eef5f0; text-align: left; padding: 6px 8px; border: 1px solid #dbe6df; font-weight: 700; color: #14603d; }
+  td { padding: 6px 8px; border: 1px solid #e3eae5; vertical-align: top; }
+  tr:nth-child(even) td { background: #fbfdfc; }
+  code { background: #f2f7f4; border: 1px solid #e3eae5; border-radius: 4px; padding: 0 4px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 8.6pt; }
+  pre {
+    background: #0f2a1e; color: #e8f5ec; border-radius: 8px; padding: 12px 14px; overflow: hidden;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 8.4pt; line-height: 1.5; margin: 6px 0 12px;
+  }
+  .note { background: #e8f5ec; border-left: 3px solid #218c5a; padding: 9px 12px; border-radius: 0 6px 6px 0; margin: 8px 0 12px; font-size: 9.2pt; }
+  .warn { background: #fdf3e3; border-left: 3px solid #c77c0a; padding: 9px 12px; border-radius: 0 6px 6px 0; margin: 8px 0 12px; font-size: 9.2pt; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .card { border: 1px solid #e3eae5; border-radius: 10px; padding: 10px 12px; background: #fff; }
+  .card b { color: #14603d; }
+  .kpi { display: flex; gap: 10px; margin: 10px 0 14px; }
+  .kpi div { flex: 1; border: 1px solid #e3eae5; border-radius: 10px; padding: 10px; background: #fbfdfc; }
+  .kpi span { display: block; font-size: 8pt; text-transform: uppercase; letter-spacing: .07em; color: #5c6b63; }
+  .kpi b { font-size: 14pt; color: #16211c; }
+  .page-break { page-break-before: always; }
+  .avoid { page-break-inside: avoid; }
+  .toc { columns: 2; column-gap: 24px; font-size: 9.4pt; margin-bottom: 8px; }
+  .toc div { margin-bottom: 5px; }
+  .toc b { color: #218c5a; display: inline-block; width: 18px; }
+  footer { margin-top: 20px; border-top: 1px solid #e3eae5; padding-top: 8px; font-size: 8.2pt; color: #5c6b63; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="eyebrow">Platform Documentation · v1.0</div>
+  <h1>Food<span>Bridge</span></h1>
+  <p class="sub">A smart food donation and poverty-support platform connecting food businesses, verified families and volunteer drivers — built for UN SDG 1 and SDG 2.</p>
+  <div class="meta">
+    <div><b>8 November 2026</b>Document date</div>
+    <div><b>React 18 + TypeScript</b>Front end</div>
+    <div><b>Supabase (PostgreSQL)</b>Back end</div>
+    <div><b>4 roles · 26 screens</b>Scope</div>
+  </div>
+</div>
+
+<h2 class="section">Contents</h2>
+<div class="toc">
+  <div><b>1</b> Product overview</div>
+  <div><b>2</b> Roles and permissions</div>
+  <div><b>3</b> Public site</div>
+  <div><b>4</b> Role dashboards</div>
+  <div><b>5</b> Smart matching engine</div>
+  <div><b>6</b> Data model</div>
+  <div><b>7</b> Security and row-level security</div>
+  <div><b>8</b> Notifications and automation</div>
+  <div><b>9</b> Technical architecture</div>
+  <div><b>10</b> Internationalisation (EN/AR)</div>
+  <div><b>11</b> Configuration and deployment</div>
+  <div><b>12</b> Demo accounts</div>
+  <div><b>13</b> Operating runbook</div>
+  <div><b>14</b> Known limitations and roadmap</div>
+</div>
+
+<h2 class="section">1. Product overview</h2>
+
+<p>FoodBridge is a multi-role web application that rescues surplus food from restaurants, bakeries and supermarkets and routes it to verified low-income families through volunteer drivers. It is a working application with authentication, role-based dashboards, a relational database, file storage and automated notifications — not a marketing landing page.</p>
+
+<h3>Problem addressed</h3>
+<div class="grid2">
+  <div class="card"><b>SDG 1 — No Poverty.</b> Food is the largest flexible expense for low-income households. Reliable food support releases money for rent, transport, school and medical costs.</div>
+  <div class="card"><b>SDG 2 — Zero Hunger.</b> Roughly one third of food produced is wasted while families go without. Redirecting safe surplus closes the gap without producing anything new.</div>
+</div>
+
+<h3>Design system</h3>
+<table>
+  <tr><th style="width:28%">Token</th><th>Value</th></tr>
+  <tr><td>Primary</td><td>Forest green <code>#218C5A</code> (hover <code>#1B7A4E</code>, deep <code>#14603D</code>)</td></tr>
+  <tr><td>Secondary</td><td>Light green <code>#E8F5EC</code></td></tr>
+  <tr><td>Background</td><td>White <code>#FFFFFF</code> and <code>#F6F8F7</code></td></tr>
+  <tr><td>Text</td><td>Charcoal <code>#16211C</code>, muted <code>#5C6B63</code></td></tr>
+  <tr><td>Status palette</td><td>Amber <code>#C77C0A</code> (urgent), red <code>#B42318</code> (critical/destructive)</td></tr>
+  <tr><td>Radius / shadow</td><td>10–16 px rounded cards, three-tier soft shadow scale</td></tr>
+  <tr><td>Typography</td><td>System UI stack only — no external font CDN; Arabic uses Segoe UI / Noto Sans Arabic / Geeza Pro</td></tr>
+</table>
+
+<h2 class="section">2. Roles and permissions</h2>
+
+<table class="avoid">
+  <tr>
+    <th style="width:26%">Capability</th>
+    <th>Donor</th><th>Beneficiary</th><th>Volunteer</th><th>Administrator</th>
+  </tr>
+  <tr><td>Create food donation</td><td>Yes</td><td>—</td><td>—</td><td>—</td></tr>
+  <tr><td>Edit / delete own donation</td><td>Yes</td><td>—</td><td>—</td><td>Yes (any)</td></tr>
+  <tr><td>Approve or reject donation</td><td>—</td><td>—</td><td>—</td><td>Yes</td></tr>
+  <tr><td>Browse approved donations</td><td>Own only</td><td>Yes</td><td>Assigned</td><td>All</td></tr>
+  <tr><td>Submit assistance request</td><td>—</td><td>Yes</td><td>—</td><td>—</td></tr>
+  <tr><td>Approve / reject request</td><td>—</td><td>Cancel own</td><td>—</td><td>Yes</td></tr>
+  <tr><td>Create match</td><td>—</td><td>—</td><td>—</td><td>Yes</td></tr>
+  <tr><td>Accept delivery task</td><td>—</td><td>—</td><td>Yes</td><td>Assigns</td></tr>
+  <tr><td>Update delivery status</td><td>—</td><td>—</td><td>Own tasks</td><td>Yes</td></tr>
+  <tr><td>Verify beneficiary accounts</td><td>—</td><td>—</td><td>—</td><td>Yes</td></tr>
+  <tr><td>View platform analytics</td><td>Own figures</td><td>Own figures</td><td>Own figures</td><td>All</td></tr>
+</table>
+
+<div class="note"><b>Enforcement is three-layered.</b> Routes are guarded in React (<code>RequireAuth</code> / <code>RequireRole</code>), the UI hides unavailable actions, and PostgreSQL row-level security independently rejects any unauthorised query — so a tampered client cannot escalate.</div>
+
+<h2 class="section">3. Public site</h2>
+
+<table>
+  <tr><th style="width:22%">Route</th><th>Purpose and key content</th></tr>
+  <tr><td><code>/</code></td><td>Hero with the headline “Connecting Food. Fighting Hunger. Building Hope.”, live statistics, three-step explainer, latest four donations, SDG 1 / SDG 2 section, registration call to action.</td></tr>
+  <tr><td><code>/about</code></td><td>Problem statement, the FoodBridge response, mission and vision, and how each role fits together.</td></tr>
+  <tr><td><code>/donations</code></td><td>All approved donations with free-text search plus category and location filters. Readable without an account.</td></tr>
+  <tr><td><code>/impact</code></td><td>Live metrics from database functions: meals distributed, families helped, deliveries, six-month trend chart, category bar chart, urgency donut, conversion progress bars.</td></tr>
+  <tr><td><code>/login</code> · <code>/register</code></td><td>Authentication. Registration includes a role selector; beneficiary sign-up collects household size, address and a verification note.</td></tr>
+  <tr><td><code>*</code></td><td>Localised 404 page.</td></tr>
+</table>
+
+<h2 class="section">4. Role dashboards</h2>
+
+<p>All four dashboards share one shell: a fixed 264 px sidebar (drawer below 1024 px), a sticky top bar with page title, notification bell and profile menu, and a content area on <code>#F6F8F7</code>.</p>
+
+<h3>4.1 Donor — <code>/donor</code></h3>
+<ul>
+  <li><b>Overview</b> — total donations, live listings, items awaiting review, meals contributed, five most recent listings.</li>
+  <li><b>My donations</b> — searchable table with status badges, inline edit modal and delete confirmation.</li>
+  <li><b>Add donation</b> — food name, category, quantity and unit, expiry date, city, pickup address, description, and a drag-and-drop photo upload (JPEG/PNG/WebP, 5 MB) written to Supabase Storage. New listings enter <code>pending</code>.</li>
+  <li><b>Incoming requests</b> — every match on the donor’s food with the matched quantity, family size, fit score and delivery status.</li>
+</ul>
+
+<h3>4.2 Beneficiary — <code>/beneficiary</code></h3>
+<ul>
+  <li><b>Overview</b> — request counts and food received, with a verification banner while the account is <code>pending</code>.</li>
+  <li><b>Browse food</b> — filtered catalogue with a “Request this food” dialog that pre-fills category and a sensible quantity, validated against availability.</li>
+  <li><b>My requests</b> — status tracking, rejection reasons, cancellation of pending or approved requests.</li>
+  <li><b>New request</b> — category, quantity, household size, urgency, area and situation notes.</li>
+</ul>
+
+<h3>4.3 Volunteer — <code>/volunteer</code></h3>
+<ul>
+  <li><b>Overview</b> — availability toggle (available / busy), active tasks, completed count, open unassigned tasks, capacity and transport.</li>
+  <li><b>Delivery tasks</b> — accept any open task, then progress it <code>assigned → picked_up → in_transit → delivered</code>. Final step cascades the whole chain (see §8).</li>
+  <li><b>History</b> — completed and cancelled deliveries with timestamps.</li>
+</ul>
+
+<h3>4.4 Administrator — <code>/admin</code></h3>
+<ul>
+  <li><b>Overview</b> — registered users by role, donations, meals, deliveries, and four work queues (verifications, donation reviews, request reviews, unmatched approved requests) plus recent activity.</li>
+  <li><b>Users</b> — searchable, role-filtered table; verify or suspend accounts; full profile drawer including verification evidence.</li>
+  <li><b>Donations</b> — moderation queue by status; approve (optionally with an internal note) or reject with a reason that reaches the donor.</li>
+  <li><b>Requests</b> — approve, reject with a reason, review family context.</li>
+  <li><b>Smart matching</b> — see §5.</li>
+  <li><b>Deliveries</b> — assign or reassign volunteers, monitor live status, force-complete a handover.</li>
+  <li><b>Analytics</b> — platform KPIs, trend chart, category performance, operational health bars, CSV export.</li>
+</ul>
+
+<h2 class="section page-break">5. Smart matching engine</h2>
+
+<p>Matching is deterministic application logic implemented in <code>src/lib/matching.ts</code>. No AI model, no external API. A request is compared with every approved donation and scored out of 100.</p>
+
+<table class="avoid">
+  <tr><th style="width:20%">Criterion</th><th style="width:14%">Weight</th><th>Rule</th></tr>
+  <tr><td>Category fit</td><td>40</td><td>Exact category match = 40; request accepts “any food” = 20; mismatch = 0.</td></tr>
+  <tr><td>Quantity</td><td>20</td><td>Donation covers the request = 20; covers at least half = 12; otherwise 4.</td></tr>
+  <tr><td>Expiry urgency</td><td>15</td><td>Expires within 3 days = 15 (rescue priority); within 7 days = 10; later = 5; expired = 0.</td></tr>
+  <tr><td>Location</td><td>15</td><td>Same city = 15; different city = 5; unknown = 3.</td></tr>
+  <tr><td>Request urgency</td><td>10</td><td>critical 10 · high 7 · normal 4 · low 2 — this is what pushes urgent families to the top.</td></tr>
+</table>
+
+<p>The UI shows the score plus a per-criterion breakdown bar, and the reasons behind each decision, so an administrator can see <em>why</em> a pairing was proposed rather than trusting a black box.</p>
+
+<pre>score = min(100, category + quantity + expiry + location + urgency)
+
+Example — "Family Produce Mix" (produce, 40 servings, +3 days, Tampines)
+matched to Fatima (produce, 15 servings, critical, Tampines):
+  category  40  (exact match)
+  quantity  20  (40 >= 15)
+  expiry    15  (<= 3 days)
+  location  15  (same city)
+  urgency   10  (critical)
+  ─────────────
+  total     100 / 100</pre>
+
+<p>Workflow: administrator selects an approved request → reviews ranked candidates → <b>Create match</b> (status <code>proposed</code>) → <b>Confirm</b> (donation and request become <code>matched</code>) → <b>Assign volunteer</b> (creates the delivery and notifies the driver).</p>
+
+<h2 class="section">6. Data model</h2>
+
+<p>Eight tables in the <code>public</code> schema of a PostgreSQL database, all with foreign keys and constraints. Identity is owned by Supabase Auth; <code>public.profiles</code> mirrors each account.</p>
+
+<table>
+  <tr><th style="width:20%">Table</th><th style="width:34%">Columns</th><th>Relationships</th></tr>
+  <tr>
+    <td><b>profiles</b></td>
+    <td><code>user_id</code> PK · full_name · email · phone · role · status · organization · address · city · household_size · verification_note · verified_at · created_at</td>
+    <td>Root of every relationship. Unique index on <code>lower(email)</code>.</td>
+  </tr>
+  <tr>
+    <td><b>donations</b></td>
+    <td><code>donation_id</code> PK · donor_id · donor_name · food_name · category · description · quantity · unit · expiry_date · image_url · location · city · status · review_note · created_at · updated_at</td>
+    <td><code>donor_id → profiles.user_id</code> (cascade)</td>
+  </tr>
+  <tr>
+    <td><b>assistance_requests</b></td>
+    <td><code>request_id</code> PK · beneficiary_id · beneficiary_name · food_type · quantity · family_size · urgency · city · notes · status · review_note · created_at · updated_at</td>
+    <td><code>beneficiary_id → profiles.user_id</code></td>
+  </tr>
+  <tr>
+    <td><b>matches</b></td>
+    <td><code>match_id</code> PK · donation_id · request_id · matched_quantity · score · note · status · created_at</td>
+    <td>→ donations, → assistance_requests. Unique pair <code>(donation_id, request_id)</code>.</td>
+  </tr>
+  <tr>
+    <td><b>volunteers</b></td>
+    <td><code>volunteer_id</code> PK · user_id · availability · area · vehicle · capacity · active · created_at</td>
+    <td><code>user_id → profiles.user_id</code> (unique — one profile per volunteer record)</td>
+  </tr>
+  <tr>
+    <td><b>deliveries</b></td>
+    <td><code>delivery_id</code> PK · match_id · volunteer_id · pickup_address · delivery_address · pickup_date · delivery_date · status · notes · created_at · updated_at</td>
+    <td><code>match_id → matches</code> (unique), <code>volunteer_id → volunteers</code></td>
+  </tr>
+  <tr>
+    <td><b>notifications</b></td>
+    <td><code>notification_id</code> PK · user_id · message · kind · link · is_read · created_at</td>
+    <td><code>user_id → profiles.user_id</code></td>
+  </tr>
+  <tr>
+    <td><b>reviews</b></td>
+    <td><code>review_id</code> PK · reviewer_id · reviewed_id · rating (1–5) · comment · created_at</td>
+    <td>→ profiles twice; unique <code>(reviewer_id, reviewed_id)</code></td>
+  </tr>
+</table>
+
+<h4>Status vocabulary</h4>
+<table>
+  <tr><th style="width:24%">Entity</th><th>Allowed states</th></tr>
+  <tr><td>donation</td><td><code>pending · approved · rejected · matched · completed · expired</code></td></tr>
+  <tr><td>assistance request</td><td><code>pending · approved · matched · fulfilled · rejected · cancelled</code></td></tr>
+  <tr><td>match</td><td><code>proposed · confirmed · completed · cancelled</code></td></tr>
+  <tr><td>delivery</td><td><code>assigned · picked_up · in_transit · delivered · cancelled</code></td></tr>
+  <tr><td>profile</td><td><code>active · pending · suspended</code></td></tr>
+</table>
+
+<h4>Reporting functions</h4>
+<ul>
+  <li><code>platform_stats()</code> — totals for donations, meals, families, deliveries, each role count, open listings, active requests.</li>
+  <li><code>donation_trends()</code> — six months of donation and meal counts.</li>
+  <li><code>category_breakdown()</code> — listings and meals per food category.</li>
+  <li><code>urgency_breakdown()</code> — request distribution by urgency.</li>
+  <li><code>available_donations</code> — security-invoker view exposing approved listings without the donor identifier.</li>
+</ul>
+
+<h2 class="section">7. Security and row-level security</h2>
+
+<p>Every table has RLS enabled and a role-specific policy. Anonymous visitors can read only approved donations, through a column-restricted grant that excludes <code>donor_id</code>.</p>
+
+<table>
+  <tr><th style="width:22%">Table</th><th>Access rule</th></tr>
+  <tr><td>profiles</td><td>Own row or administrator. Insert restricted to a self-owned row with role ≠ admin.</td></tr>
+  <tr><td>donations</td><td>Approved rows are public; owner and administrator see everything; matched families and assigned volunteers see the listing they are involved in.</td></tr>
+  <tr><td>assistance_requests</td><td>Own requests, the donor of a matched donation, the assigned volunteer, or administrator.</td></tr>
+  <tr><td>matches</td><td>Visible to the donor, beneficiary and volunteer involved, plus administrator. Writes are administrator-only.</td></tr>
+  <tr><td>volunteers</td><td>Own record or administrator.</td></tr>
+  <tr><td>deliveries</td><td>Involved parties or administrator; unassigned tasks are visible to any active volunteer so they can be claimed.</td></tr>
+  <tr><td>notifications</td><td>Own rows only; no client inserts.</td></tr>
+  <tr><td>reviews</td><td>Reviewer or reviewed party (and administrator); one review per pair, self-reviews blocked.</td></tr>
+</table>
+
+<div class="note"><b>Privilege-escalation defences.</b> Owners cannot change their own <code>role</code>, <code>status</code>, <code>verified_at</code> or <code>email</code>. A donor cannot approve their own donation; a beneficiary cannot approve their own request; both are silently reverted by guard triggers. Volunteers may only progress the status of their own assignment and cannot reassign it. Helper predicates (<code>is_admin</code>, <code>can_view_donation</code>, <code>can_view_request</code>, <code>can_view_match</code>, <code>can_view_delivery</code>) are <code>SECURITY DEFINER</code> with a pinned search path, which also prevents policy recursion.</div>
+
+<p>Passwords are handled entirely by Supabase Auth and stored as bcrypt hashes in <code>auth.users</code>; no plaintext or password hash exists in the application schema or the client bundle.</p>
+
+<h2 class="section">8. Notifications and automation</h2>
+
+<p>Notifications are generated by database triggers, not by the browser, so they cannot be forged or missed when a request fails mid-flight.</p>
+
+<table>
+  <tr><th style="width:34%">Event</th><th>Recipient and message</th></tr>
+  <tr><td>Donation approved / rejected</td><td>Donor — approval confirmation, or rejection with the administrator’s reason.</td></tr>
+  <tr><td>Request approved / rejected / fulfilled</td><td>Beneficiary — status change with any review note.</td></tr>
+  <tr><td>Match created</td><td>Beneficiary (“a matching donation was found”) and donor (“being scheduled for pickup”).</td></tr>
+  <tr><td>Delivery created</td><td>Volunteer — new assignment with the pickup address.</td></tr>
+  <tr><td>Delivery marked delivered</td><td>Donor, beneficiary and volunteer; also cascades match → completed, donation → completed, request → fulfilled.</td></tr>
+</table>
+
+<p>The bell in the dashboard top bar polls the unread count, and <code>/notifications</code> lists everything with per-item and bulk “mark read”.</p>
+
+<h2 class="section">9. Technical architecture</h2>
+
+<div class="kpi">
+  <div><span>Framework</span><b>React 18</b></div>
+  <div><span>Language</span><b>TypeScript</b></div>
+  <div><span>Styling</span><b>Tailwind 3</b></div>
+  <div><span>Routing</span><b>React Router 6</b></div>
+  <div><span>Backend</span><b>Supabase</b></div>
+</div>
+
+<h4>Project structure</h4>
+<pre>src/
+  App.tsx                  route table + role guards
+  main.tsx                 entry point
+  styles.css               design tokens, component classes, RTL rules
+  components/
+    layout/                PublicLayout, DashboardLayout, LanguageSwitch
+    donations/             DonationCard, DonationFilters
+    ui/                    Primitives, Form, Modal, Charts
+  context/                 AuthContext, ToastContext
+  i18n/                    en.ts, ar.ts, LanguageContext
+  lib/                     supabase, api, matching, types, format, l10n
+  pages/                   public pages + donor/ beneficiary/ volunteer/ admin/
+supabase/migrations/       8 versioned SQL migrations
+docs/                      this document</pre>
+
+<p><b>Data access</b> is centralised in <code>src/lib/api.ts</code>: one typed function per query, with errors normalised into readable messages. Components never build queries inline except for the two composite reads (donor request view, delivery claim).</p>
+
+<p><b>Charts</b> are hand-authored SVG components (area trend, bar, donut, progress) — no charting dependency, so the bundle stays small and the styling follows the token system exactly.</p>
+
+<p><b>Feedback</b> uses a toast provider for transient results, inline field errors for validation, skeleton/spinner states for loads and explicit empty states for every list.</p>
+
+<h2 class="section">10. Internationalisation (EN/AR)</h2>
+
+<p>The interface ships in English and Arabic. The choice is made in <b>Settings → Language &amp; region</b> or from the switch in the site header, and is persisted per browser.</p>
+
+<ul>
+  <li><b>Full RTL mirroring</b> — <code>dir="rtl"</code> on the document, logical CSS properties (<code>ps-*</code>, <code>start-*</code>, <code>border-e</code>) so the sidebar, tables and cards flip without duplicate styles.</li>
+  <li><b>Localised data labels</b> — food categories, months, dates and relative times (for example "3 days ago" rendered in Arabic) follow the active language.</li>
+  <li><b>Shared links</b> — <code>?lang=ar</code> or <code>?lang=en</code> opens the app in that language.</li>
+  <li><b>Consistency rule</b> — when Arabic is selected, no English UI string remains; dictionary lookups fall back to English only for a missing key, never mixing text on screen.</li>
+</ul>
+
+<div class="note">User-authored content (food names, notes, organisation names) is stored and displayed exactly as entered — translation applies to the platform interface only.</div>
+
+<h2 class="section">11. Configuration and deployment</h2>
+
+<h4>Environment variables</h4>
+<pre>VITE_SUPABASE_URL=https://&lt;project-ref&gt;.supabase.co
+VITE_SUPABASE_ANON_KEY=&lt;public anon key&gt;</pre>
+
+<div class="warn">Only the public anon key belongs in the front end. The service-role key must never be added to this project, to a build, or to source control.</div>
+
+<h4>Commands</h4>
+<pre>npm install          # install dependencies
+npm run dev          # local development server
+npm run build        # production build into dist/
+npm run preview      # preview the production build</pre>
+
+<h4>Backend provisioning</h4>
+<ol>
+  <li>Create a Supabase project.</li>
+  <li>Apply <code>supabase/migrations/0001…0008</code> in order — schema, policies, reporting functions, triggers, storage bucket.</li>
+  <li>Run the seed migration to create demo accounts and sample data, or create the first administrator profile manually (see §12).</li>
+  <li>Set the two environment variables and rebuild.</li>
+</ol>
+
+<h2 class="section">12. Demo accounts</h2>
+
+<p>All seeded accounts share the password <code>FoodBridge123!</code> and are pre-confirmed. The login screen can fill any of them with one click.</p>
+
+<table>
+  <tr><th style="width:34%">Email</th><th style="width:20%">Role</th><th>Seeded state</th></tr>
+  <tr><td><code>admin@foodbridge.demo</code></td><td>Administrator</td><td>Full platform access</td></tr>
+  <tr><td><code>greenleaf@foodbridge.demo</code></td><td>Donor</td><td>GreenLeaf Bistro — 12 donations, 7 matched</td></tr>
+  <tr><td><code>sunrise@foodbridge.demo</code></td><td>Donor</td><td>Sunrise Bakery — bakery surplus</td></tr>
+  <tr><td><code>freshmart@foodbridge.demo</code></td><td>Donor</td><td>FreshMart — produce and pantry</td></tr>
+  <tr><td><code>fatima@foodbridge.demo</code></td><td>Beneficiary</td><td>Verified, household of 5, mixed history</td></tr>
+  <tr><td><code>joseph@foodbridge.demo</code></td><td>Beneficiary</td><td>Verified, household of 4</td></tr>
+  <tr><td><code>mei@foodbridge.demo</code></td><td>Beneficiary</td><td><b>Pending</b> — demonstrates the verification queue</td></tr>
+  <tr><td><code>daniel@foodbridge.demo</code></td><td>Volunteer</td><td>Bedok / Tampines, motorbike, one active task</td></tr>
+  <tr><td><code>priya@foodbridge.demo</code></td><td>Volunteer</td><td>Woodlands, car, one in-transit task</td></tr>
+</table>
+
+<div class="note">Email confirmation is enabled on the project. Seeded accounts are already confirmed; turn off “Confirm email” in Supabase → Authentication if you want new sign-ups to reach their dashboard immediately.</div>
+
+<h2 class="section">13. Operating runbook</h2>
+
+<h4>Onboard a food donor</h4>
+<ol>
+  <li>Donor registers and selects “Food donor”; the account activates immediately.</li>
+  <li>They add a donation — it is created as <code>pending</code> and is not publicly visible.</li>
+  <li>Administrator reviews it under <b>Donations</b> and approves; the donor is notified and it appears on <code>/donations</code>.</li>
+</ol>
+
+<h4>Fulfil a family request</h4>
+<ol>
+  <li>Beneficiary submits a request with urgency and household size.</li>
+  <li>Administrator verifies the account if still pending, then approves the request under <b>Requests</b>.</li>
+  <li>In <b>Smart matching</b>, pick the request, review the ranked candidates, create and confirm a match.</li>
+  <li>Assign a volunteer; they are notified and the task appears in their board.</li>
+  <li>Volunteer progresses the task to <b>delivered</b>; the donation, match and request close together and all three parties are notified.</li>
+</ol>
+
+<h4>Recover an unmatched donation</h4>
+<p>Cancel the match — the donation returns to <code>approved</code> and the request to <code>approved</code>, both available for a new pairing.</p>
+
+<h2 class="section">14. Known limitations and roadmap</h2>
+
+<table>
+  <tr><th style="width:32%">Area</th><th>Current state</th><th>Next step</th></tr>
+  <tr><td>Review submission UI</td><td>Reviews table, policies and read views exist; no form to post a rating yet</td><td>Add a review prompt after a delivery is completed</td></tr>
+  <tr><td>Real-time updates</td><td>Views refresh on navigation and on demand</td><td>Subscribe to Supabase Realtime for the delivery board</td></tr>
+  <tr><td>Partial quantities</td><td>A match consumes the whole donation for its request</td><td>Decrement <code>donation.quantity</code> and allow multiple matches per donation</td></tr>
+  <tr><td>Matching trigger</td><td>Administrator-initiated from the matching workspace</td><td>Nightly job proposing matches automatically</td></tr>
+  <tr><td>Email / SMS</td><td>In-app notifications only</td><td>Transactional email through Supabase Auth hooks</td></tr>
+  <tr><td>Maps</td><td>Text addresses only</td><td>Optional distance scoring using geocoded coordinates</td></tr>
+</table>
+
+<footer>
+  FoodBridge — Platform Documentation · v1.0 · 8 November 2026<br />
+  React 18 · TypeScript · Tailwind CSS · Supabase (PostgreSQL, Auth, Storage) · Bilingual EN/AR with full RTL support
+</footer>
+
+</body>
+</html>

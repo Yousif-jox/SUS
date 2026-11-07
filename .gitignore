@@ -1,0 +1,28 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build output
+dist/
+dist-ssr/
+*.local
+
+# environment — never commit real keys
+.env
+.env.*
+!.env.example
+
+# tooling / editor
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.log
+
+# site-builder runtime metadata
+.accio/
+.accio-site.json
+
+# local test / seed scripts (contain credentials)
+test-db.mjs
+seed-test-accounts.mjs
