@@ -138,7 +138,7 @@ export const en = {
     volunteer: 'Volunteer to deliver',
     requestHelp: 'Request assistance',
     supportHours: 'Support hours: Mon–Sat, 9am–7pm',
-    hub: 'Community hub operations — Cairo, Egypt',
+    hub: 'Community hub operations — El Alamein, Egypt',
     rights: 'A community food-rescue platform.',
     sdg: 'Aligned with UN SDG 1 · No Poverty and SDG 2 · Zero Hunger.',
   },
